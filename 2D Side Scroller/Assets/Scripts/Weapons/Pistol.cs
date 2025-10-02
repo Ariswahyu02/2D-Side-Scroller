@@ -11,7 +11,17 @@ public class Pistol : Weapon
 
     public override void Attack()
     {
-        // Implement pistol attack logic (single shot)
+        // // Implement pistol attack logic (single shot)
+        // PlayerController player = FindObjectOfType<PlayerController>();
+        // if (player != null && player.IsDead())
+        // {
+        //     if (animator != null)
+        //     {
+        //         animator.Play("Idle");
+        //         animator.speed = 1f;
+        //     }
+        //     return;
+        // }
         if (!CanFire()) return;
         lastFireTime = Time.time;
 
@@ -46,10 +56,12 @@ public class Pistol : Weapon
             BulletPoolManager.Instance.GetBullet(
                 WeaponType.Pistol,
                 firePoint.position,
-                firePoint.right, // or firePoint.up depending on your setup
+                directionShot,
                 bulletSpeed,
                 damage
             );
+
+            SoundManager.Instance.PlaySFX("Revolver");
         }
     }
 }

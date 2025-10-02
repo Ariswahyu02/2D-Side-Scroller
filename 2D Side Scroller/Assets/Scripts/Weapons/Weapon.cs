@@ -1,11 +1,16 @@
 using UnityEngine;
 public class Weapon : MonoBehaviour
 {
+    public Sprite weaponIcon;
     [SerializeField] protected int damage = 10; // Default damage value
+    [SerializeField] private int baseDamage = 10;
     [SerializeField] protected float fireRate = 1.0f; // Default fire rate
-    protected float lastFireTime;
+    [SerializeField] private float baseFireRate = 1.0f;
     [SerializeField] protected Transform firePoint;
     [SerializeField] protected float bulletSpeed = 20f;
+    public int weaponTypeSlot; // 0 for equipped, 1 for inventory
+    protected float lastFireTime;
+    public Vector2 directionShot;
 
     protected Animator animator;
     protected float animationLength;
@@ -57,5 +62,26 @@ public class Weapon : MonoBehaviour
             animator.Play("Idle");
             animator.speed = 1f; // Reset speed to normal
         }
+    }
+
+    public void ApplyBuffs()
+    {
+        float buffedDamage = baseDamage;
+        float buffedFireRate = baseFireRate;
+        foreach (var buff in InventoryManager.Instance.currentBuffs)
+        {
+            if (buff == null) continue;
+            switch (buff.buffType)
+            {
+                case WeaponBuffType.PowerUp:
+                    buffedDamage += buff.value;
+                    break;
+                case WeaponBuffType.FireRateUp:
+                    buffedFireRate += buff.value;
+                    break;
+            }
+        }
+        damage = Mathf.RoundToInt(buffedDamage);
+        fireRate = buffedFireRate;
     }
 }

@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "InventoryOpen",
+                    "type": "Button",
+                    "id": "a4ce4f4e-ba53-4a00-bfa9-20cb914246a0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -70,6 +79,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "6d3752c3-50b1-4d05-9c92-e1f9126f8666",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryOpen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

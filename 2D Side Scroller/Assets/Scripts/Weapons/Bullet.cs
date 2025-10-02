@@ -19,20 +19,20 @@ public class Bullet : MonoBehaviour
         transform.position += (Vector3)direction * speed * Time.deltaTime;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        // Implement damage logic here
-        // Example: if (other.CompareTag("Enemy")) { /* deal damage */ }
-        if(other.CompareTag("Enemy"))
-        {
-            Enemy enemy = other.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(damage);
-                gameObject.SetActive(false);
-            }
-        }
-    }
+    // void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     // Implement damage logic here
+    //     // Example: if (other.CompareTag("Enemy")) { /* deal damage */ }
+    //     if(other.CompareTag("Enemy"))
+    //     {
+    //         Enemy enemy = other.GetComponent<Enemy>();
+    //         if (enemy != null)
+    //         {
+    //             enemy.TakeDamage(damage);
+    //             gameObject.SetActive(false);
+    //         }
+    //     }
+    // }
 
     void OnCollisionEnter2D(Collision2D collision)
     {

@@ -5,7 +5,7 @@ public class Zombie : Enemy
     protected override void Update()
     {
         // Example: slow movement
-        transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+        // transform.position += Vector3.left * moveSpeed * Time.deltaTime;
     }
 
     protected override void Die()
