@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float speed;
-    private int damage;
+    [Header("Bullet Settings")]
+    public float speed;
+    public int damage;
+
     private Vector2 direction;
 
-    public void Init(Vector2 dir, float spd, int dmg)
+    public virtual void Init(Vector2 dir, float spd, int dmg)
     {
         direction = dir.normalized;
         speed = spd;
@@ -14,40 +16,36 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    void Update()
+    protected virtual void Update()
     {
-        transform.position += (Vector3)direction * speed * Time.deltaTime;
+        // Gerakan manual
+        transform.Translate(direction * speed * Time.deltaTime);
     }
 
-    // void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     // Implement damage logic here
-    //     // Example: if (other.CompareTag("Enemy")) { /* deal damage */ }
-    //     if(other.CompareTag("Enemy"))
-    //     {
-    //         Enemy enemy = other.GetComponent<Enemy>();
-    //         if (enemy != null)
-    //         {
-    //             enemy.TakeDamage(damage);
-    //             gameObject.SetActive(false);
-    //         }
-    //     }
-    // }
-
-    void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        OnImpact(collision.collider);
+    }
+
+    protected virtual void OnImpact(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
-                gameObject.SetActive(false);
+                Deactivate();
             }
         }
     }
 
-    void OnBecameInvisible()
+    protected virtual void OnBecameInvisible()
+    {
+        Deactivate();
+    }
+
+    protected virtual void Deactivate()
     {
         gameObject.SetActive(false);
     }

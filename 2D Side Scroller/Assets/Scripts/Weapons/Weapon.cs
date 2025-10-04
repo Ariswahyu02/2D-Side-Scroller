@@ -1,7 +1,12 @@
 using UnityEngine;
 public class Weapon : MonoBehaviour
 {
+    [Header("Weapon ID")]
+    public string weaponID;
+
+    [Header("Weapon Properties")]
     public Sprite weaponIcon;
+    public WeaponType weaponType;
     [SerializeField] protected int damage = 10; // Default damage value
     [SerializeField] private int baseDamage = 10;
     [SerializeField] protected float fireRate = 1.0f; // Default fire rate
@@ -15,6 +20,9 @@ public class Weapon : MonoBehaviour
     protected Animator animator;
     protected float animationLength;
 
+    protected bool isHolding = false;
+    protected bool shotFiredThisCycle = false;
+
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
@@ -23,6 +31,51 @@ public class Weapon : MonoBehaviour
     public virtual void Attack()
     {
         // Default attack behavior (can be overridden)
+    }
+
+    public void OnShootPressed()
+    {
+        isHolding = true;
+        CancelInvoke(nameof(StopAnimation));
+    }
+
+    public void OnShootReleased()
+    {
+        isHolding = false;
+
+        if (!shotFiredThisCycle)
+        {
+            CancelInvoke(nameof(StopAnimation));
+            StopAnimation();
+            return;
+        }
+
+        if (animator != null)
+        {
+            var st = animator.GetCurrentAnimatorStateInfo(0);
+            if (st.IsName("Shoot"))
+            {
+                float clipLen = GetAnimationLengthByName("Shoot");
+                float speed = Mathf.Max(0.0001f, animator.speed);
+                float remaining = Mathf.Max(0f, (1f - Mathf.Clamp01(st.normalizedTime)) * (clipLen / speed));
+                CancelInvoke(nameof(StopAnimation));
+                Invoke(nameof(StopAnimation), remaining);
+            }
+            else
+            {
+                StopAnimation();
+            }
+        }
+        else
+        {
+            StopAnimation();
+        }
+    }
+
+    protected void BeginShootCycle()
+    {
+        shotFiredThisCycle = false;
+        if (isHolding) CancelInvoke(nameof(StopAnimation));
     }
 
     public bool CanFire()
@@ -83,5 +136,11 @@ public class Weapon : MonoBehaviour
         }
         damage = Mathf.RoundToInt(buffedDamage);
         fireRate = buffedFireRate;
+    }
+
+    [ContextMenu("Generate Weapon ID")]
+    public void GenerateWeaponID()
+    {
+        weaponID = System.Guid.NewGuid().ToString();
     }
 }

@@ -137,8 +137,12 @@ public class GameUI : Singleton<GameUI>
         inventoryPanel.SetActive(!inventoryPanel.activeSelf);
         if (inventoryPanel.activeSelf)
         {
+            Time.timeScale = 0f;
             UpdateInventoryUI();
             UpdateCurrentWeaponAndBuffUI();
+        }else
+        {
+            Time.timeScale = 1f;
         }
     }
 }

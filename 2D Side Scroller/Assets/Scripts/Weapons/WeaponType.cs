@@ -1,6 +1,6 @@
 public enum WeaponType
 {
-    Pistol,
-    AssaultRifle,
-    Shotgun
+    None,
+    Revolver,
+    Glock
 }

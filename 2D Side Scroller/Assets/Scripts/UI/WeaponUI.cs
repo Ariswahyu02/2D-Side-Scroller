@@ -29,7 +29,7 @@ public class WeaponUI : MonoBehaviour, IPointerClickHandler
 
         if (weapon.weaponTypeSlot == 1) // In Inventory
         {
-            InventoryManager.Instance.EquipNewWeapon(weapon, this);
+            InventoryManager.Instance.EquipNewWeapon(weapon.weaponID, this);
         }
 
         GameUI.Instance.UpdateCurrentWeaponAndBuffUI();

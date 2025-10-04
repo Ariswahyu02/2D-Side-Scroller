@@ -97,7 +97,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -135,7 +135,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -189,12 +189,12 @@ TextureImporter:
       name: '[LOAD] Bazooka - M20_0'
       rect:
         serializedVersion: 2
-        x: 34
-        y: 0
-        width: 114
-        height: 26
+        x: 4
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -211,12 +211,12 @@ TextureImporter:
       name: '[LOAD] Bazooka - M20_1'
       rect:
         serializedVersion: 2
-        x: 196
-        y: 0
-        width: 144
-        height: 26
+        x: 197
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -234,11 +234,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 386
-        y: 0
-        width: 146
-        height: 26
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -252,37 +252,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '[LOAD] Bazooka - M20_3'
-      rect:
-        serializedVersion: 2
-        x: 577
-        y: 15
-        width: 32
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cd8a2b3e23556c3c0800000000000000
-      internalID: -4339687513868031780
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: '[LOAD] Bazooka - M20_4'
       rect:
         serializedVersion: 2
-        x: 610
-        y: 0
-        width: 114
-        height: 26
+        x: 576
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -296,37 +274,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '[LOAD] Bazooka - M20_5'
-      rect:
-        serializedVersion: 2
-        x: 769
-        y: 16
-        width: 32
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1f6c1abcffcf2b210800000000000000
-      internalID: 1347417414100436721
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: '[LOAD] Bazooka - M20_6'
       rect:
         serializedVersion: 2
-        x: 802
-        y: 0
-        width: 114
-        height: 26
+        x: 768
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -340,37 +296,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '[LOAD] Bazooka - M20_7'
-      rect:
-        serializedVersion: 2
-        x: 960
-        y: 16
-        width: 32
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 98bb489c4910a87e0800000000000000
-      internalID: -1762594565614421111
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: '[LOAD] Bazooka - M20_8'
       rect:
         serializedVersion: 2
-        x: 994
-        y: 0
-        width: 114
-        height: 26
+        x: 959
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -384,37 +318,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '[LOAD] Bazooka - M20_9'
-      rect:
-        serializedVersion: 2
-        x: 1151
-        y: 16
-        width: 32
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b840ea68253bb4ea0800000000000000
-      internalID: -5887414920828550005
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: '[LOAD] Bazooka - M20_10'
       rect:
         serializedVersion: 2
-        x: 1186
-        y: 0
-        width: 114
-        height: 26
+        x: 1149
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -428,37 +340,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: '[LOAD] Bazooka - M20_11'
-      rect:
-        serializedVersion: 2
-        x: 1346
-        y: 16
-        width: 32
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 037e8f203f899dca0800000000000000
-      internalID: -5991589659745392848
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: '[LOAD] Bazooka - M20_12'
       rect:
         serializedVersion: 2
-        x: 1378
-        y: 0
-        width: 114
-        height: 26
+        x: 1346
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -475,12 +365,12 @@ TextureImporter:
       name: '[LOAD] Bazooka - M20_13'
       rect:
         serializedVersion: 2
-        x: 1542
-        y: 0
-        width: 142
-        height: 26
+        x: 1540
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -497,12 +387,12 @@ TextureImporter:
       name: '[LOAD] Bazooka - M20_14'
       rect:
         serializedVersion: 2
-        x: 1738
-        y: 0
-        width: 138
-        height: 26
+        x: 1736
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -520,11 +410,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1935
-        y: 0
-        width: 133
-        height: 26
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -542,11 +432,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2131
-        y: 0
-        width: 129
-        height: 26
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -564,11 +454,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2327
-        y: 0
-        width: 125
-        height: 26
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -586,11 +476,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2523
-        y: 0
-        width: 121
-        height: 26
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -608,11 +498,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2719
-        y: 0
-        width: 117
-        height: 26
+        y: 1
+        width: 169
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -629,12 +519,12 @@ TextureImporter:
       name: '[LOAD] Bazooka - M20_20'
       rect:
         serializedVersion: 2
-        x: 2914
-        y: 0
-        width: 114
-        height: 26
+        x: 2911
+        y: 1
+        width: 158
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -651,7 +541,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4e1a124516fb54d43acfde313bebe99b
     internalID: 0
     vertices: []
     indices: 

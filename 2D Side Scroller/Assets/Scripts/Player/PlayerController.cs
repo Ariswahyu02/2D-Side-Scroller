@@ -52,8 +52,12 @@ public class PlayerController : MonoBehaviour
         if (isDead) return;
         moveInput = playerControls.Player.Move.ReadValue<Vector2>();
 
-        if (playerControls.Weapon.Shoot.IsPressed()) Shoot();
-        else InventoryManager.Instance.currentWeapon?.StopAnimation();
+        if (playerControls.Weapon.Shoot.IsPressed())
+        {
+            InventoryManager.Instance.currentWeapon?.OnShootPressed();
+            Shoot();    
+        }
+        else InventoryManager.Instance.currentWeapon?.OnShootReleased();
 
         FlipSprite(moveInput.x);
     }

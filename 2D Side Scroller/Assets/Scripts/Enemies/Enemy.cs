@@ -29,6 +29,10 @@ public class Enemy : MonoBehaviour
     [Header("Enemy UI")]
     [SerializeField] private EnemyUI enemyUI;
 
+    [Header("On Enemy Died")]
+    [SerializeField] private WeaponBuffType buffDropWhenDied;
+    [SerializeField] private WeaponType weaponDropWhenDied;
+
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -141,6 +145,18 @@ public class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         gameObject.SetActive(false);
+        if (buffDropWhenDied == WeaponBuffType.FireRateUp && weaponDropWhenDied == WeaponType.None)
+        {
+            DroppedItemPoolManager.Instance.GetBuff(buffDropWhenDied, transform.position, 0f);
+        }
+        else if (buffDropWhenDied == WeaponBuffType.PowerUp && weaponDropWhenDied == WeaponType.None)
+        {
+            DroppedItemPoolManager.Instance.GetBuff(buffDropWhenDied, transform.position, 0f);
+        }
+        else if (weaponDropWhenDied != WeaponType.Glock && buffDropWhenDied == WeaponBuffType.None)
+        {
+            DroppedItemPoolManager.Instance.GetWeaponPickup(weaponDropWhenDied, transform.position, 0f);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

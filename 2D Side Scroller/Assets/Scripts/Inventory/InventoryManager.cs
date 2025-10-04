@@ -1,15 +1,34 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
+    [Header("Weapon References")]
+    public Weapon[] weaponInPlayerHand;
+
+    [Header("Player Inventory")]
     public Weapon currentWeapon;
     public Weapon[] availableWeapons;
     public WeaponBuff[] currentBuffs;
     public WeaponBuff[] availableBuffs;
 
+    private readonly Dictionary<string, Weapon> handMap = new Dictionary<string, Weapon>();
+
     protected override void Awake()
     {
         base.Awake();
+        handMap.Clear();
+
+        // Add weapon and id to dict
+        foreach (var weapon in weaponInPlayerHand)
+        {
+            if (weapon != null && !string.IsNullOrEmpty(weapon.weaponID) && !handMap.ContainsKey(weapon.weaponID))
+            {
+                handMap.Add(weapon.weaponID, weapon);
+            }
+        }
+
+        VerifyWeaponInPlayerHand(currentWeapon);
     }
 
     public float GetAppliedDamageBuffValue()
@@ -51,7 +70,6 @@ public class InventoryManager : Singleton<InventoryManager>
                 break;
             }
         }
-        // Remove the specific buff instance from availableBuffs
         for (int i = 0; i < availableBuffs.Length; i++)
         {
             if (availableBuffs[i] == buff)
@@ -63,24 +81,35 @@ public class InventoryManager : Singleton<InventoryManager>
         currentWeapon.ApplyBuffs();
     }
 
-    public void EquipNewWeapon(Weapon weapon, WeaponUI weaponUI)
+    public void EquipNewWeapon(string weaponID, WeaponUI weaponUI)
     {
-        currentWeapon?.StopAnimation();
-        weaponUI.SetWeaponUI(null);
-        // Remove the specific weapon instance from availableWeapons
+        if (string.IsNullOrEmpty(weaponID)) return;
+
+        Weapon target = null;
         for (int i = 0; i < availableWeapons.Length; i++)
         {
-            if (availableWeapons[i] == weapon)
+            var w = availableWeapons[i];
+            if (w != null && w.weaponID == weaponID)
             {
+                target = w;
                 availableWeapons[i] = null;
                 break;
             }
         }
+
+        if (target == null) return;
+
+        currentWeapon?.StopAnimation();
+        weaponUI.SetWeaponUI(null);
+
         SendBackEquippedWeaponToInventory(currentWeapon);
 
-        currentWeapon = weapon;
-        currentWeapon.weaponTypeSlot = 0; // 0 for equipped
+        currentWeapon = target;
+        currentWeapon.weaponTypeSlot = 0;
         currentWeapon.ApplyBuffs();
+
+        GameUI.Instance.UpdateCurrentWeaponAndBuffUI();
+        VerifyWeaponInPlayerHand(currentWeapon);
     }
 
     public void UnEquipBuff(int indexClickedBuff, BuffUI buffUI)
@@ -135,5 +164,57 @@ public class InventoryManager : Singleton<InventoryManager>
             }
         }
         return false;
+    }
+
+    public void AddBuffToInventory(WeaponBuff buff)
+    {
+        for (int i = 0; i < availableBuffs.Length; i++)
+        {
+            if (availableBuffs[i] == null)
+            {
+                availableBuffs[i] = buff;
+                buff.buffSlotType = 1; // 1 for inventory
+                break;
+            }
+        }
+    }
+
+    public void PickUpWeapon(string weaponID)
+    {
+        if (string.IsNullOrEmpty(weaponID)) return;
+
+        if (!handMap.TryGetValue(weaponID, out var handWeapon) || handWeapon == null)
+        {
+            Debug.LogWarning($"Weapon with ID: '{weaponID}' Not Found");
+            return;
+        }
+
+        for (int i = 0; i < availableWeapons.Length; i++)
+        {
+            if (availableWeapons[i] == handWeapon)
+                return;
+
+            if (availableWeapons[i] == null)
+            {
+                availableWeapons[i] = handWeapon;
+                handWeapon.weaponTypeSlot = 1; // 1 = inventory
+                break;
+            }
+        }
+
+        GameUI.Instance.UpdateInventoryUI();
+    }
+    
+    public void VerifyWeaponInPlayerHand(Weapon weapon)
+    {
+        for (int i = 0; i < weaponInPlayerHand.Length; i++)
+        {
+            weaponInPlayerHand[i].gameObject.SetActive(false);
+
+            if (weaponInPlayerHand[i].weaponID == weapon.weaponID)
+            {
+                weaponInPlayerHand[i].gameObject.SetActive(true);
+            }
+        }
     }
 }
