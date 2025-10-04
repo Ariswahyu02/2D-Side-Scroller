@@ -106,7 +106,10 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Die();
+            return;
         }
+
+        SoundManager.Instance.PlaySFX("Enemy Hit");
     }
 
     public int GetCurrentEnemyHealth()
@@ -157,6 +160,8 @@ public class Enemy : MonoBehaviour
         {
             DroppedItemPoolManager.Instance.GetWeaponPickup(weaponDropWhenDied, transform.position, 0f);
         }
+
+        SoundManager.Instance.PlaySFX("Enemy Died");
     }
 
     private void OnTriggerEnter2D(Collider2D other)

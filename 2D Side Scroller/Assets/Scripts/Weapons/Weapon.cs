@@ -28,6 +28,11 @@ public class Weapon : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    protected virtual void Start()
+    {
+        GameUI.Instance.UpdateWeaponStats(baseDamage, baseFireRate, damage, fireRate);
+    }
+
     public virtual void Attack()
     {
         // Default attack behavior (can be overridden)
@@ -136,6 +141,9 @@ public class Weapon : MonoBehaviour
         }
         damage = Mathf.RoundToInt(buffedDamage);
         fireRate = buffedFireRate;
+
+        // Update Stat UI
+        GameUI.Instance.UpdateWeaponStats(baseDamage, baseFireRate, damage, fireRate);
     }
 
     [ContextMenu("Generate Weapon ID")]

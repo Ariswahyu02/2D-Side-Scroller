@@ -10,6 +10,7 @@ public class DroppedBuff : MonoBehaviour
         {
             InventoryManager.Instance.AddBuffToInventory(weaponBuff);
             gameObject.SetActive(false);
+            SoundManager.Instance.PlaySFX("Buff");
         }
     }
 }

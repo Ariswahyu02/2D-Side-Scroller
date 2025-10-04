@@ -52,10 +52,12 @@ public class PlayerController : MonoBehaviour
         if (isDead) return;
         moveInput = playerControls.Player.Move.ReadValue<Vector2>();
 
+        if (GameManager.Instance.isGameWin) return;
+
         if (playerControls.Weapon.Shoot.IsPressed())
         {
             InventoryManager.Instance.currentWeapon?.OnShootPressed();
-            Shoot();    
+            Shoot();
         }
         else InventoryManager.Instance.currentWeapon?.OnShootReleased();
 
@@ -98,6 +100,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         animator.SetTrigger("DamagedTrigger");
+        SoundManager.Instance.PlaySFX("Player Hit");
     }
 
     void Die()
@@ -107,6 +110,7 @@ public class PlayerController : MonoBehaviour
         // Play death animation, disable controls, etc.
         Debug.Log("Player died!");
         InventoryManager.Instance.currentWeapon?.StopAnimation();
+        SoundManager.Instance.PlaySFX("Player Died");
         // Optionally: gameObject.SetActive(false);
     }
 

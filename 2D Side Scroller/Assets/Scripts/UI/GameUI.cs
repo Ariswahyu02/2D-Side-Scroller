@@ -1,12 +1,14 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameUI : Singleton<GameUI>
 {
     [SerializeField] private Animator fadeAnimator;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private Button restartButton;
+    [SerializeField] private TextMeshProUGUI winLoseText;
 
     [Header("Player Stats UI")]
     [SerializeField] private Slider healthSlider;
@@ -18,8 +20,15 @@ public class GameUI : Singleton<GameUI>
     [SerializeField] private BuffUI[] currentBuffUi;
     [SerializeField] private BuffUI[] buffUis;
 
+    [Header("Weapon Stat")]
+    [SerializeField] private TextMeshProUGUI baseDamageText;
+    [SerializeField] private TextMeshProUGUI baseFireRateText;
+    [SerializeField] private TextMeshProUGUI afterBuffedDamageText;
+    [SerializeField] private TextMeshProUGUI afterBuffedFireRateText;
+
 
     private Vector3 gameOverPanelOriginalPosition;
+    PlayerController playerController;
 
     protected override void Awake()
     {
@@ -27,30 +36,42 @@ public class GameUI : Singleton<GameUI>
         gameOverPanel.SetActive(false);
         restartButton.onClick.AddListener(() => GameSceneManager.Instance.RestartGame());
         gameOverPanelOriginalPosition = gameOverPanel.transform.position;
+
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     private void Start()
     {
         UpdateInventoryUI();
         UpdateCurrentWeaponAndBuffUI();
+
     }
 
-    public void FadeIn()
+    public void FadeInGameOver()
     {
         float fadeInDuration = GetAnimationLengthByName("FadeInScreen");
         fadeAnimator.SetTrigger("FadeIn");
 
+        SoundManager.Instance.PlayBGM("Game Over", false);
         // wait fadeinduration then show game over panel
-        DOVirtual.DelayedCall(fadeInDuration, ShowGameOverPanel);
+        DOVirtual.DelayedCall(fadeInDuration, ShowGameDonePanel);
     }
 
-    public void FadeOut()
+    public void FadeInGameWin()
     {
-        fadeAnimator.SetTrigger("FadeOut");
+        float fadeInDuration = GetAnimationLengthByName("FadeInScreen");
+        fadeAnimator.SetTrigger("FadeIn");
+
+        SoundManager.Instance.PlayBGM("Game Win", false);
+        // wait fadeinduration then show game over panel
+        DOVirtual.DelayedCall(fadeInDuration, ShowGameDonePanel);
     }
 
-    private void ShowGameOverPanel()
+    private void ShowGameDonePanel()
     {
+        if (!GameManager.Instance.isGameWin) winLoseText.text = "Game Over";
+        else winLoseText.text = "Game Win";
+
         gameOverPanel.SetActive(true);
         gameOverPanel.transform.DOMoveY(gameOverPanelOriginalPosition.y, 0.5f).From(-Screen.height).SetEase(Ease.OutBack);
     }
@@ -134,15 +155,40 @@ public class GameUI : Singleton<GameUI>
 
     public void ToggleInventory()
     {
+        if (playerController.IsDead() || GameManager.Instance.isGameWin) return;
+
         inventoryPanel.SetActive(!inventoryPanel.activeSelf);
         if (inventoryPanel.activeSelf)
         {
             Time.timeScale = 0f;
             UpdateInventoryUI();
             UpdateCurrentWeaponAndBuffUI();
-        }else
+        }
+        else
         {
             Time.timeScale = 1f;
         }
     }
+
+    public void UpdateWeaponStats(float baseDamage, float baseFireRate, float buffedDamage, float buffedFireRate)
+    {
+        baseDamageText.text = baseDamage.ToString();
+        baseFireRateText.text = baseFireRate.ToString();
+
+        if (buffedDamage > baseDamage)
+        {
+            afterBuffedDamageText.gameObject.SetActive(true);
+            afterBuffedDamageText.text = "->" + buffedDamage.ToString();
+        }
+        else afterBuffedDamageText.gameObject.SetActive(false);
+
+
+        if (buffedFireRate > baseFireRate)
+        {
+            afterBuffedFireRateText.gameObject.SetActive(true);
+            afterBuffedFireRateText.text = "->" + buffedFireRate.ToString();
+        }
+        else afterBuffedFireRateText.gameObject.SetActive(false);
+    }
+
 }
